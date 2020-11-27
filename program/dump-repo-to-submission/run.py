@@ -1206,13 +1206,10 @@ def check_experimental_results(repo_uoa, module_uoa='experiment', tags='mlperf',
         else:
             raise Exception("Expected 'accuracy' or 'performance' or 'audit' in experiment_tags!")
 
-        global any_closed_results
-        if division.lower() == 'closed':
-            any_closed_results = True
+#         if mode == 'accuracy': continue
 
-        global any_open_results
-        if division.lower() == 'open':
-            any_open_results = True
+        if division == 'closed': any_closed_results = True
+        if division == 'open':   any_open_results   = True
 
         organization = submitter
 
