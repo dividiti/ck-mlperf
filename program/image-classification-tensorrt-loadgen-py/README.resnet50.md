@@ -13,25 +13,19 @@
 
 ```bash
 $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=resnet50 --scenario=singlestream \
---mode=performance --target_latency=2.04
+--model=resnet50 --mode=performance --target_latency=2.04 \
+--scenario=singlestream --batch_size=1
 ```
 
 #### Accuracy
 
 ```bash
 $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=resnet50 --scenario=singlestream \
---mode=accuracy --dataset_size=50000
+--model=resnet50 --mode=accuracy --dataset_size=50000 \
+--scenario=singlestream --batch_size=1
 ```
 
-#### Compliance
-
-```bash
-$ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=resnet50 --scenario=singlestream \
---compliance,=TEST04-A,TEST04-B,TEST01,TEST05 --target_latency=2.04
-```
+#### Compliance **TODO**
 
 
 <a name="offline"></a>
@@ -41,25 +35,19 @@ $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
 
 ```bash
 $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=resnet50 --scenario=offline --batch_size=64 \
---mode=performance --target_qps=1300
+--model=resnet50 --mode=performance --target_qps=1300 \
+--scenario=offline --batch_size=64
 ```
 
 #### Accuracy
 
 ```bash
 $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=resnet50 --scenario=offline --batch_size=64 \
---mode=accuracy --dataset_size=50000
+--model=resnet50 --mode=accuracy --dataset_size=50000 \
+--scenario=offline --batch_size=64
 ```
 
-#### Compliance
-
-```bash
-$ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=resnet50 --scenario=offline --batch_size=64 \
---compliance,=TEST04-A,TEST04-B,TEST01,TEST05 --target_qps=1300
-```
+#### Compliance **TODO**
 
 
 <a name="multistream"></a>
@@ -69,22 +57,16 @@ $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
 
 ```bash
 $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=resnet50 --scenario=multistream --batch_size=70 --nstreams={{{batch_size}}} \
---mode=performance --max_query_count=272160
+--model=resnet50 --mode=performance --max_query_count=272160 \
+--scenario=multistream --batch_size=68 --nstreams={{{batch_size}}}
 ```
 
 #### Accuracy
 
 ```bash
 $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=resnet50 --scenario=multistream --batch_size=70 --nstreams={{{batch_size}}} \
---mode=accuracy --dataset_size=50000
+--model=resnet50 --mode=accuracy --dataset_size=50000 \
+--scenario=multistream --batch_size=70 --nstreams={{{batch_size}}}
 ```
 
-#### Compliance
-
-```bash
-$ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=resnet50 --scenario=multistream --batch_size=70 --nstreams={{{batch_size}}} \
---compliance,=TEST04-A,TEST04-B,TEST01,TEST05 --max_query_count=272160
-```
+#### Compliance **TODO**
