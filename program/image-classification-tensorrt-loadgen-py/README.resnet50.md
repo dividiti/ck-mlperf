@@ -42,7 +42,7 @@ $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
 ```bash
 $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
 --model=resnet50 --scenario=offline --batch_size=64 \
---mode=performance --target_qps=1400
+--mode=performance --target_qps=1300
 ```
 
 #### Accuracy
@@ -58,7 +58,7 @@ $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
 ```bash
 $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
 --model=resnet50 --scenario=offline --batch_size=64 \
---compliance,=TEST04-A,TEST04-B,TEST01,TEST05 --target_qps=1400
+--compliance,=TEST04-A,TEST04-B,TEST01,TEST05 --target_qps=1300
 ```
 
 
