@@ -132,8 +132,7 @@
     "max_query_count": {
       "###": {
         "ck_env": "--env.CK_LOADGEN_MAX_QUERY_COUNT=###",
-        "record_tags": "max_query_count.###",
-        "record_uoa_parts": "max_query_count.###"
+        "record_tags": "max_query_count.###"
       }
     },
     "target_latency": {
@@ -145,8 +144,7 @@
     "target_qps": {
       "###": {
         "ck_env": "--env.CK_LOADGEN_TARGET_QPS=###",
-        "record_tags": "target_qps.###",
-        "record_uoa_parts": "target_qps.###"
+        "record_tags": "target_qps.###"
       }
     },
     "no_record": {
