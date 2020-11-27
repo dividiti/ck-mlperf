@@ -1,9 +1,8 @@
 #!/bin/sh
 
 export BERT_REF_ROOT=${CK_ENV_MLPERF_INFERENCE}/language/bert
-export BERT_BUILD=./build
+export BERT_BUILD=${BERT_REF_ROOT}/build
 export BERT_BUILD_DATA=${BERT_BUILD}/data
-export PYTHONPATH=${PYTHONPATH}:${BERT_REF_ROOT}/DeepLearningExamples/TensorFlow/LanguageModeling/BERT
 
 
 if [ ! -e "$BERT_BUILD" ]; then
@@ -22,22 +21,11 @@ if [ ! -e "$BERT_BUILD" ]; then
     fi
 fi
 
-CWD=`pwd`
-
-cp ${BERT_REF_ROOT}/bert_config.json $CWD
-cp ${BERT_REF_ROOT}/user.conf $CWD
-
-make -f ${BERT_REF_ROOT}/Makefile download_data
-make -f ${BERT_REF_ROOT}/Makefile download_model
+cd $BERT_REF_ROOT
+make setup
 
 cp ${BERT_REF_ROOT}/create_squad_data.py ${BERT_REF_ROOT}/DeepLearningExamples/TensorFlow/LanguageModeling/BERT/utils/create_squad_data.py
 
 sed -i'' 's/ accuracy-squad.py/ .\/accuracy-squad.py/g' ${BERT_REF_ROOT}/run.py
 
-rm -rf build/logs build/result bert_code
-
-ln -s $CWD build/logs
-ln -s $CWD build/result
-ln -s ${BERT_REF_ROOT} bert_code
-
-$CK_ENV_COMPILER_PYTHON_FILE ${BERT_REF_ROOT}/run.py --mlperf_conf=${CK_ENV_MLPERF_INFERENCE}/mlperf.conf --user_conf=${BERT_REF_ROOT}/user.conf --backend=${CK_BERT_BACKEND} --scenario=${CK_LOADGEN_SCENARIO} $CK_LOADGEN_MODE_STRING
+$CK_ENV_COMPILER_PYTHON_FILE ${BERT_REF_ROOT}/run.py --backend=${CK_BERT_BACKEND} --scenario=${CK_LOADGEN_SCENARIO} $CK_LOADGEN_MODE_STRING
