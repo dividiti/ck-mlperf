@@ -69,9 +69,7 @@ def load_query_samples(sample_indices):     # 0-based indices in our whole datas
 
         preprocessed_image_buffer[sample_index] = np.array(img)
         tick('l')
-
-    if VERBOSITY_LEVEL:
-        print('')
+    print('')
 
 
 def unload_query_samples(sample_indices):
@@ -80,9 +78,7 @@ def unload_query_samples(sample_indices):
 
     preprocessed_image_buffer = {}
     tick('U')
-
-    if VERBOSITY_LEVEL:
-        print('')
+    print('')
 
 
 def issue_queries(query_samples):
