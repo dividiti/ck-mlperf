@@ -9,15 +9,11 @@
 <a name="singlestream"></a>
 ### SingleStream
 
-```bash
-$ ck install package --tags=model,tensorrt,resnet50.singlestream,for.xavier
-```
-
 #### Performance
 
 ```bash
 $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=resnet50 --mode=performance --target_latency=2.04 \
+--model=resnet50 --mode=performance --target_latency=2.5 \
 --scenario=singlestream --batch_size=1
 ```
 
@@ -27,32 +23,6 @@ $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
 $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
 --model=resnet50 --mode=accuracy --dataset_size=50000 \
 --scenario=singlestream --batch_size=1
-```
-
-#### Compliance **TODO**
-
-
-<a name="offline"></a>
-### Offline
-
-```bash
-$ ck install package --tags=model,tensorrt,resnet50.offline,for.xavier
-```
-
-#### Performance
-
-```bash
-$ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=resnet50 --mode=performance --target_qps=1300 \
---scenario=offline --batch_size=64
-```
-
-#### Accuracy
-
-```bash
-$ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=resnet50 --mode=accuracy --dataset_size=50000 \
---scenario=offline --batch_size=64
 ```
 
 #### Compliance **TODO**
@@ -61,16 +31,12 @@ $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
 <a name="multistream"></a>
 ### MultiStream
 
-```bash
-$ ck install package --tags=model,tensorrt,resnet50.multistream,for.xavier
-```
-
 #### Performance ((272,160 == 9! * 3/4) > 270,336)
 
 ```bash
 $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
 --model=resnet50 --mode=performance --max_query_count=272160 \
---scenario=multistream --batch_size=68 --nstreams={{{batch_size}}}
+--scenario=multistream --batch_size=69 --nstreams={{{batch_size}}}
 ```
 
 #### Accuracy
@@ -78,7 +44,29 @@ $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
 ```bash
 $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
 --model=resnet50 --mode=accuracy --dataset_size=50000 \
---scenario=multistream --batch_size=70 --nstreams={{{batch_size}}}
+--scenario=multistream --batch_size=69 --nstreams={{{batch_size}}}
+```
+
+#### Compliance **TODO**
+
+
+<a name="offline"></a>
+### Offline
+
+#### Performance
+
+```bash
+$ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
+--model=resnet50 --mode=performance --target_qps=1500 \
+--scenario=offline --batch_size=70
+```
+
+#### Accuracy
+
+```bash
+$ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
+--model=resnet50 --mode=accuracy --dataset_size=50000 \
+--scenario=offline --batch_size=70
 ```
 
 #### Compliance **TODO**
