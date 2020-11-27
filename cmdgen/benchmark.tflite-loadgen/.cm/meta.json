@@ -54,16 +54,20 @@
     "model": {
         "resnet50": {
             "division": "closed",
-            "model_tags": [ "###" ]
+            "model_tags": [ "###" ],
+            "model_readable": "###"
         },
         "lite.": {
-            "model_tags": [ "efficientnet", "###" ]
+            "model_tags": [ "efficientnet", "###" ],
+            "model_readable": "effnet_###"
         },
         "v[123]-.*": {
-            "model_tags": [ "mobilenet", "###" ]
+            "model_tags": [ "mobilenet", "###" ],
+            "model_readable": "mobilenet_###"
         },
         "edgetpu_.*": {
-            "model_tags": [ "mobilenet", "###" ]
+            "model_tags": [ "mobilenet", "###" ],
+            "model_readable": "mobilenet_###"
         }
     },
     "model_extra_tags": {
@@ -225,7 +229,6 @@
 
     "dataset_size": "<<<recommended_dataset_size>>>",
     "division": "open",
-    "model_readable": "<<<model_tags->>>",
     "preprocessed_using": "opencv",
     "preprocessed_tag": "preprocessed_using.<<<preprocessed_using>>>",
     "record_uoa": "<<<record_uoa_parts->>>",
