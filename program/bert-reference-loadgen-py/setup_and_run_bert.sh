@@ -1,16 +1,9 @@
 #!/bin/sh
 
-## Usually program's tmp/
-#
-CWD=`pwd`
-
 export BERT_REF_ROOT=${CK_ENV_MLPERF_INFERENCE}/language/bert
-export BERT_BUILD=${CWD}/build
+export BERT_BUILD=./build
 export BERT_BUILD_DATA=${BERT_BUILD}/data
-
-## CWD takes priority over the original code, because we patch some of the original files and retain them in CWD:
-#
-export PYTHONPATH=${PYTHONPATH}:${CWD}:${BERT_REF_ROOT}:${BERT_REF_ROOT}/DeepLearningExamples/TensorFlow/LanguageModeling/BERT
+export PYTHONPATH=${PYTHONPATH}:${BERT_REF_ROOT}/DeepLearningExamples/TensorFlow/LanguageModeling/BERT
 
 
 if [ ! -e "$BERT_BUILD" ]; then
@@ -29,6 +22,7 @@ if [ ! -e "$BERT_BUILD" ]; then
     fi
 fi
 
+CWD=`pwd`
 
 cp ${BERT_REF_ROOT}/bert_config.json $CWD
 cp ${BERT_REF_ROOT}/user.conf $CWD
@@ -36,25 +30,14 @@ cp ${BERT_REF_ROOT}/user.conf $CWD
 make -f ${BERT_REF_ROOT}/Makefile download_data
 make -f ${BERT_REF_ROOT}/Makefile download_model
 
-## BERT scripts expect a specific structure of build/ directory which we then bend to suit our needs:
-#
-rm -rf build/logs build/result bert_code utils
+cp ${BERT_REF_ROOT}/create_squad_data.py ${BERT_REF_ROOT}/DeepLearningExamples/TensorFlow/LanguageModeling/BERT/utils/create_squad_data.py
+
+sed -i'' 's/ accuracy-squad.py/ .\/accuracy-squad.py/g' ${BERT_REF_ROOT}/run.py
+
+rm -rf build/logs build/result bert_code
+
 ln -s $CWD build/logs
 ln -s $CWD build/result
 ln -s ${BERT_REF_ROOT} bert_code
 
-## Patching some of BERT's scripts:
-#
-sed 's/ accuracy-squad.py/ .\/accuracy-squad.py/g' ${BERT_REF_ROOT}/run.py >${CWD}/run.py
-
-## Adding one line to a Python script without disrupting the indentation structure:
-#
-EXTRA_LINE="if os.environ.get('CK_BERT_TRANSFORMERS_OVERRIDE','no').lower() in ('yes','on','true','1'): self.model.bert.set_weights_split()"
-sed "/^([\ \t]*)self.model.load_state_dict/a \1${EXTRA_LINE}" ${BERT_REF_ROOT}/pytorch_SUT.py >${CWD}/pytorch_SUT.py
-
-mkdir ${CWD}/utils
-cp ${BERT_REF_ROOT}/create_squad_data.py ${CWD}/utils/create_squad_data.py
-
-## Run the patched version of run.py:
-#
-$CK_ENV_COMPILER_PYTHON_FILE ${CWD}/run.py --mlperf_conf=${CK_ENV_MLPERF_INFERENCE}/mlperf.conf --user_conf=${BERT_REF_ROOT}/user.conf --backend=${CK_BERT_BACKEND} --scenario=${CK_LOADGEN_SCENARIO} $CK_LOADGEN_MODE_STRING
+$CK_ENV_COMPILER_PYTHON_FILE ${BERT_REF_ROOT}/run.py --mlperf_conf=${CK_ENV_MLPERF_INFERENCE}/mlperf.conf --user_conf=${BERT_REF_ROOT}/user.conf --backend=${CK_BERT_BACKEND} --scenario=${CK_LOADGEN_SCENARIO} $CK_LOADGEN_MODE_STRING
