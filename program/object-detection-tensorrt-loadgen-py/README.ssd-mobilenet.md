@@ -19,25 +19,19 @@ $ ck install package --tags=dataset,object-detection,preprocessed,using-opencv,f
 
 ```bash
 $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=ssd-mobilenet --scenario=singlestream \
---mode=performance --target_latency=1.50
+--model=ssd-mobilenet --mode=performance --target_latency=1.50 \
+--scenario=singlestream --batch_size=1
 ```
 
 #### Accuracy
 
 ```bash
 $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=ssd-mobilenet --scenario=singlestream \
---mode=accuracy --dataset_size=5000
+--model=ssd-mobilenet --mode=accuracy --dataset_size=5000 \
+--scenario=singlestream --batch_size=1
 ```
 
-#### Compliance
-
-```bash
-$ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=ssd-mobilenet --scenario=singlestream \
---compliance,=TEST04-A,TEST04-B,TEST01,TEST05 --target_latency=1.50
-```
+#### Compliance **TODO**
 
 
 <a name="offline"></a>
@@ -47,25 +41,19 @@ $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
 
 ```bash
 $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=ssd-mobilenet --scenario=offline --batch_size=128 \
---mode=performance --target_qps=1250
+--model=ssd-mobilenet --mode=performance --target_qps=1250 \
+--scenario=offline --batch_size=128
 ```
 
 #### Accuracy
 
 ```bash
 $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=ssd-mobilenet --scenario=offline --batch_size=128 \
---mode=accuracy --dataset_size=5000
+--model=ssd-mobilenet --mode=accuracy --dataset_size=5000 \
+--scenario=offline --batch_size=128
 ```
 
-#### Compliance
-
-```bash
-$ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=ssd-mobilenet --scenario=offline --batch_size=128 \
---compliance,=TEST04-A,TEST04-B,TEST01,TEST05 --target_qps=1250
-```
+#### Compliance **TODO**
 
 
 <a name="multistream"></a>
@@ -75,22 +63,16 @@ $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
 
 ```bash
 $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=ssd-mobilenet --scenario=multistream --batch_size=75 --nstreams={{{batch_size}}} \
---mode=performance --max_query_count=272160
+--model=ssd-mobilenet --mode=performance --max_query_count=272160 \
+--scenario=multistream --batch_size=75 --nstreams={{{batch_size}}}
 ```
 
 #### Accuracy
 
 ```bash
 $ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=ssd-mobilenet --scenario=multistream --batch_size=75 --nstreams={{{batch_size}}} \
---mode=accuracy --dataset_size=5000
+--model=ssd-mobilenet --mode=accuracy --dataset_size=5000 \
+--scenario=multistream --batch_size=80 --nstreams={{{batch_size}}}
 ```
 
-#### Compliance
-
-```bash
-$ ck run cmdgen:benchmark.tensorrt-loadgen --verbose \
---model=ssd-mobilenet --scenario=multistream --batch_size=75 --nstreams={{{batch_size}}} \
---compliance,=TEST04-A,TEST04-B,TEST01,TEST05 --max_query_count=272160
-```
+#### Compliance **TODO**
