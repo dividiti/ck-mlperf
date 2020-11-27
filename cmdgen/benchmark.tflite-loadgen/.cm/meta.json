@@ -24,7 +24,8 @@
         "<<<library>>>",
         "<<<model_readable>>>",
         "<<<scenario>>>",
-        "<<<mode>>><<<mode_extension>>><<<scenario_extension>>>"
+        "<<<mode>>><<<mode_extension>>><<<scenario_extension>>>",
+        "<<<dataset_size>>>"
     ]
   },
   "build_map": {
@@ -147,7 +148,7 @@
       "accuracy": {
         "ck_env": "--env.CK_LOADGEN_MODE=AccuracyOnly",
         "recommended_dataset_size": "50000",
-        "mode_extension": "-dataset_size.<<<dataset_size>>>-<<<preprocessed_tag>>>",
+        "mode_extension": ".<<<preprocessed_tag>>>",
         "output_file": "accuracy.txt"
       },
       "performance": {
