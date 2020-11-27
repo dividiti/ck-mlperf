@@ -1,45 +1,41 @@
 # MLPerf Inference - Object Detection - TFLite (with Coral EdgeTPU support)
 
-## Coral EdgeTPU
-
-### SSD-MobileNet-v1-EdgeTPU, SSD-MobileNet-v2-EdgeTPU
+### CPU (SSD-MobileNet-v1)
 
 #### Performance
 
 ```bash
-$ ck run cmdgen:benchmark.object-detection.tflite-loadgen --verbose \
---library=tflite-edgetpu --model:=v1:v2 \
---scenario=singlestream --mode=performance --target_latency=20 \
---sut=rpi4coral
+$ ck run cmdgen:benchmark.object-detection.tflite-loadgen --library=tflite-v2.2.0-ruy \
+--model:=`ck list_variations misc --query_module_uoa=package --tags=model,tflite,ssd-mobilenet --variation_prefix=from-zenodo --separator=:` \
+--scenario=singlestream --mode=performance --target_latency=123 \
+--verbose --sut=rpi4coral
 ```
 
 #### Accuracy
 
 ```bash
-$ ck run cmdgen:benchmark.object-detection.tflite-loadgen --verbose \
---library=tflite-edgetpu --model:=v1:v2 \
---scenario=singlestream --mode=accuracy --dataset_size=5000 \
---sut=rpi4coral
+$ ck run cmdgen:benchmark.object-detection.tflite-loadgen --library=tflite-v2.2.0-ruy \
+--model:=`ck list_variations misc --query_module_uoa=package --tags=model,tflite,ssd-mobilenet --variation_prefix=from-zenodo --separator=:` \
+--scenario=singlestream --mode=accuracy --dataset_size=50 \
+--verbose --sut=rpi4coral
 ```
 
-## CPU
-
-### SSD-MobileNet-v1 non-quantized
+### Coral EdgeTPU (SSD-MobileNet-v2)
 
 #### Performance
 
 ```bash
-$ ck run cmdgen:benchmark.object-detection.tflite-loadgen --verbose \
---library=tflite-v2.2.0-ruy --model:=non-quantized \
---scenario=singlestream --mode=performance --target_latency=170 \
---sut=rpi4coral
+$ ck run cmdgen:benchmark.object-detection.tflite-loadgen --library=tflite-edgetpu \
+--model:=`ck list_variations misc --query_module_uoa=package --tags=ssd-mobilenet,edgetpu --variation_prefix=v2 --separator=:` \
+--scenario=singlestream --mode=performance --target_latency=123 \
+--verbose --sut=rpi4coral
 ```
 
 #### Accuracy
 
 ```bash
-$ ck run cmdgen:benchmark.object-detection.tflite-loadgen --verbose \
---library=tflite-v2.2.0-ruy --model:=non-quantized \
+$ ck run cmdgen:benchmark.object-detection.tflite-loadgen --library=tflite-edgetpu \
+--model:=`ck list_variations misc --query_module_uoa=package --tags=ssd-mobilenet,edgetpu --variation_prefix=v2 --separator=:` \
 --scenario=singlestream --mode=accuracy --dataset_size=5000 \
---sut=rpi4coral
+--verbose --sut=rpi4coral
 ```
