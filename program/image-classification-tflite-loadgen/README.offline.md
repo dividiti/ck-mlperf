@@ -7,7 +7,7 @@
 
 ### ResNet50
 
-#### Performance
+#### Performance **NOT TESTED**
 
 ```bash
 $ ck run cmdgen:benchmark.tflite-loadgen --library=tflite-v2.2.0-ruy \
@@ -15,7 +15,7 @@ $ ck run cmdgen:benchmark.tflite-loadgen --library=tflite-v2.2.0-ruy \
 --verbose --sut=firefly
 ```
 
-#### Accuracy
+#### Accuracy **NOT TESTED**
 
 ```bash
 $ ck run cmdgen:benchmark.tflite-loadgen --library=tflite-v2.2.0-ruy \
