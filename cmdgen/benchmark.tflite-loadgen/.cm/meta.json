@@ -6,7 +6,8 @@
     ],
     "deps": [
         "--dep_add_tags.python=v3",
-        "--dep_add_tags.mlperf-inference-src=r0.7",
+        "--dep_add_tags.mlperf-inference-src=upstream.master",
+        "--dep_add_tags.loadgen-config-file=<<<lg_config>>>",
         "--dep_add_tags.compiler=<<<compiler_tags>>>"
     ],
     "record_tags": [
@@ -43,12 +44,19 @@
         "firefly": {
             "compiler_tags": "gcc,v7"
         },
-        "xavier": {
-            "compiler_tags": "gcc,v7"
-        },
         "###": {
             "compiler_tags": "gcc,v8"
         }
+    },
+    "implementation": {
+      "armnn": {
+        "lg_config": "image-classification-armnn-tflite",
+        "program_name": "image-classification-armnn-tflite-loadgen"
+      },
+      "tflite": {
+        "lg_config": "image-classification-tflite",
+        "program_name": "image-classification-tflite-loadgen"
+      }
     },
     "model": {
         "resnet": {
@@ -83,7 +91,6 @@
       "armnn-v19.08-neon": {
         "ck_env": "--env.USE_NEON=1",
         "deps": "--dep_add_tags.library=armnn,v19.08,neon",
-        "program_name": "image-classification-armnn-tflite-loadgen",
         "record_tags": [
             "inference_engine.armnn",
             "inference_engine_version.v19.08",
@@ -93,7 +100,6 @@
       "armnn-v19.08-opencl": {
         "ck_env": "--env.USE_OPENCL=1",
         "deps": "--dep_add_tags.library=armnn,v19.08,opencl",
-        "program_name": "image-classification-armnn-tflite-loadgen",
         "record_tags": [
             "inference_engine.armnn",
             "inference_engine_version.v19.08",
@@ -102,7 +108,6 @@
       },
       "tflite-v1.13.1": {
         "deps": "--dep_add_tags.library=tflite,v1.13.1",
-        "program_name": "image-classification-tflite-loadgen",
         "record_tags": [
             "inference_engine.tflite",
             "inference_engine_version.v1.13.1"
@@ -110,7 +115,6 @@
       },
       "tflite-v2.2.0-ruy": {
         "deps": "--dep_add_tags.library=tflite,v2.2.0",
-        "program_name": "image-classification-tflite-loadgen",
         "record_tags": [
             "inference_engine.tflite",
             "inference_engine_version.v2.2.0",
@@ -119,7 +123,6 @@
       },
       "tflite-v2.3": {
         "deps": "--dep_add_tags.library=tflite,v2.3.90",
-        "program_name": "image-classification-tflite-loadgen",
         "record_tags": [
             "inference_engine.tflite",
             "inference_engine_version.v2.3.0",
@@ -128,7 +131,6 @@
       },
       "tflite-v2.3-ruy": {
         "deps": "--dep_add_tags.library=tflite,v2.3.90,with.ruy",
-        "program_name": "image-classification-tflite-loadgen",
         "record_tags": [
             "inference_engine.tflite",
             "inference_engine_version.v2.3.0",
@@ -137,7 +139,6 @@
       },
       "tflite-v2.3-xnnpack": {
         "deps": "--dep_add_tags.library=tflite,v2.3.90,with.xnnpack",
-        "program_name": "image-classification-tflite-loadgen",
         "record_tags": [
             "inference_engine.tflite",
             "inference_engine_version.v2.3.0",
